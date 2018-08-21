@@ -2,6 +2,7 @@ import { loadFrom, getScriptPath } from 'utils/playerutils';
 import { serialize } from 'utils/parser';
 import { isValidNumber, isNumber, pick, isBoolean } from 'utils/underscore';
 import { Features } from 'environment/environment';
+import { isContextual, replaceContextualMacro } from 'utils/contextual';
 
 /* global __webpack_public_path__:true */
 /* eslint camelcase: 0 */
@@ -169,6 +170,11 @@ const Config = function(options, persisted) {
         // The "playlist" in the config is actually a feed that contains a playlist
         config.feedData = configPlaylist;
         config.playlist = configPlaylist.playlist;
+    }
+
+    if (isContextual(config.playlist)) {
+        config.playlist = replaceContextualMacro(document, config.playlist);
+        config.contextual = true;
     }
 
     config.qualityLabels = config.qualityLabels || config.hlslabels;
