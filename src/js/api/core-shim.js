@@ -146,7 +146,7 @@ Object.assign(CoreShim.prototype, {
             if (!this.setup) {
                 return;
             }
-            setupError(this, error, api);
+            setupError(this, api, error);
         });
     },
     playerDestroy() {
@@ -251,7 +251,7 @@ Object.assign(CoreShim.prototype, {
     }
 });
 
-function setupError(core, error, api) {
+function setupError(core, api, error) {
     resolved.then(() => {
         const playerError = convertToPlayerError(MSG_TECHNICAL_ERROR, SETUP_ERROR_UNKNOWN, error);
         const model = core._model || core.modelShim;
