@@ -1,5 +1,4 @@
 import Config from 'api/config';
-import { CONTEXTUAL_MACRO } from 'utils/contextual';
 
 describe('API Config', function() {
 
@@ -162,16 +161,6 @@ describe('API Config', function() {
 
             apiConfig = new Config({ base: CUSTOM_BASE });
             expect(apiConfig.base).to.equal(CUSTOM_BASE);
-        });
-    });
-
-    describe('contextual feed config options', function () {
-        it('sets contextual to true when using a contextual feed', function () {
-            const config = new Config({
-                playlist: CONTEXTUAL_MACRO
-            });
-
-            expect(config.contextual).to.be.true;
         });
     });
 });
